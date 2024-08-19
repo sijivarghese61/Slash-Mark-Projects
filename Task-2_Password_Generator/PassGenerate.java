@@ -15,18 +15,24 @@ public class PassGenerate {
 
     /*
      * Generates a password based on the specified parameters.
+     * 
      * @param length The desired length of the password.
+     * 
      * @param uppercase Whether to include uppercase letters.
+     * 
      * @param lowercase Whether to include lowercase letters.
+     * 
      * @param numbers Whether to include numeric digits.
+     * 
      * @param symbols Whether to include special symbols.
+     * 
      * @return A randomly generated password as a String.
      */
     public String generatePassword(int length,
-                                   boolean uppercase,
-                                   boolean lowercase,
-                                   boolean numbers,
-                                   boolean symbols) {
+            boolean uppercase,
+            boolean lowercase,
+            boolean numbers,
+            boolean symbols) {
 
         // StringBuilder to build the password.
         StringBuilder password = new StringBuilder();
@@ -40,13 +46,15 @@ public class PassGenerate {
         String n = ""; // Numeric digit
         String s = ""; // Special symbol
 
-        // Add uppercase letters to valid characters and select one random uppercase letter.
+        // Add uppercase letters to valid characters and select one random uppercase
+        // letter.
         if (uppercase) {
             validchar += upperletters;
             int indexno = random.nextInt(upperletters.length());
             u += upperletters.charAt(indexno);
         }
-        // Add lowercase letters to valid characters and select one random lowercase letter.
+        // Add lowercase letters to valid characters and select one random lowercase
+        // letter.
         if (lowercase) {
             validchar += lowerletters;
             int indexno = random.nextInt(lowerletters.length());
@@ -67,26 +75,25 @@ public class PassGenerate {
 
         /*
          * If the desired password length is 4 or greater, ensure the password contains
-         * at least one character from each selected type. Fill the rest of the password with
+         * at least one character from each selected type. Fill the rest of the password
+         * with
          * randomly selected characters from the valid character set.
          */
         if (length >= 4) {
-            if (length > 4) {
-                for (int i = 1; i <= length - 4; i++) {
-                    int indexno = random.nextInt(validchar.length());
-                    password.append(validchar.charAt(indexno));
-                }
-            }
             // Append one random character from each selected type.
             password.append(s + u + n + l);
+            for (int i = password.length(); i < length; i++) {
+                int indexno = random.nextInt(validchar.length());
+                password.append(validchar.charAt(indexno));
+            }
         } else {
-            // If the desired length is less than 4, simply generate a password of the specified length
+            // If the desired length is less than 4, simply generate a password of the
+            // specified length
             // using randomly selected characters from the valid character set.
-            if (password.length() < length) {
-                for (int i = 1; i <= length; i++) {
-                    int indexno = random.nextInt(validchar.length());
-                    password.append(validchar.charAt(indexno));
-                }
+
+            for (int i = 1; i <= length; i++) {
+                int indexno = random.nextInt(validchar.length());
+                password.append(validchar.charAt(indexno));
             }
         }
 
